@@ -7,7 +7,7 @@ public class BaseWarriorClass : BaseCharacterClass {
     public BaseWarriorClass()
     {
         CharacterClassName = "Warrior";
-        CharacterClassDescription = "A strong and mighty hero.";
+        CharacterClassDescription = "A mighty class which excells at close quater combat using sword and shield.";
         Stamina = 13;
         Strength = 15;
         Dexterity = 10;

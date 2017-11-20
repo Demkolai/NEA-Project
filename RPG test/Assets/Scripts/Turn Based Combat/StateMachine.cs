@@ -11,12 +11,14 @@ public class StateMachine : MonoBehaviour {
     {
         START,
         PLAYERCHOICE,
+        CALCULATEDAMAGE,
+        ADDSTATUSEFFECTS,
         ENEMYCHOICE,
         WIN,
         LOSE
     }
 
-    private BattleStates currentState;
+    public static BattleStates currentState;
 
 	
 	void Start () {
@@ -38,6 +40,12 @@ public class StateMachine : MonoBehaviour {
                 break;
 
             case (BattleStates.ENEMYCHOICE):
+                break;
+
+            case (BattleStates.CALCULATEDAMAGE): //calculate damage and if status effect is active, add that damage.
+                break;
+
+            case (BattleStates.ADDSTATUSEFFECTS):
                 break;
 
             case (BattleStates.WIN):

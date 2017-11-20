@@ -22,18 +22,18 @@ public class BaseItems {
         WEAPON,
         SCROLL,
         POTION
-        
+
     }
     private ItemTypes itemType;
 
-    //Dictionary<string, string> itemsDictionary
-    //ItemName = itemsDictionary["ItemName"];
-    //ItemDescription = itemsDictionary["ItemDescription"];
-    //    ItemID = int.Parse(itemsDictionary["ItemID"]);
-    //itemType = (ItemTypes)System.Enum.Parse (typeof(BaseItems.ItemTypes), itemsDictionary["ItemType"].ToString());
+    public BaseItems(Dictionary<string, string> itemsDictionary){
+        ItemName = itemsDictionary["ItemName"];
+        ItemDescription = itemsDictionary["ItemDescription"];
+        ItemID = int.Parse(itemsDictionary["ItemID"]);
+        itemType = (ItemTypes)System.Enum.Parse (typeof(BaseItems.ItemTypes), itemsDictionary["ItemType"].ToString());
+    }
 
     public BaseItems() { }
-
 
 
     public string ItemName
