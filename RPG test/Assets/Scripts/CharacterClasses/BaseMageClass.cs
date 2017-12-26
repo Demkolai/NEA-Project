@@ -14,6 +14,8 @@ public class BaseMageClass : BaseCharacterClass {
         Intellect = 15;
         Charisma = 10;
         Wisdom = 13;
+        playerAbilities.Add(new RangedAutoAttack());
+        playerAbilities.Add(new Fireblast());
     }
 
 

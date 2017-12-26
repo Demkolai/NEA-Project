@@ -65,16 +65,16 @@ public class CreateNewCharacter : MonoBehaviour {
 
     private void StoreNewPlayerInfo()
     {
-        GameInfromation.PlayerName = newPlayer.PlayerName;
-        GameInfromation.PlayerLevel = newPlayer.PlayerLevel;
-        GameInfromation.Stamina = newPlayer.Stamina;
-        GameInfromation.Strength = newPlayer.Strength;
-        GameInfromation.Intellect = newPlayer.Intellect;
-        GameInfromation.Dexterity = newPlayer.Dexterity;
-        GameInfromation.Charisma = newPlayer.Charisma;
-        GameInfromation.Wisdom = newPlayer.Wisdom;
-        GameInfromation.Armor = newPlayer.Armor;
-        GameInfromation.Gold = newPlayer.Gold;
+        GameInformation.PlayerName = newPlayer.PlayerName;
+        GameInformation.PlayerLevel = newPlayer.PlayerLevel;
+        GameInformation.Stamina = newPlayer.Stamina;
+        GameInformation.Strength = newPlayer.Strength;
+        GameInformation.Intellect = newPlayer.Intellect;
+        GameInformation.Dexterity = newPlayer.Dexterity;
+        GameInformation.Charisma = newPlayer.Charisma;
+        GameInformation.Wisdom = newPlayer.Wisdom;
+        GameInformation.Armor = newPlayer.Armor;
+        GameInformation.Gold = newPlayer.Gold;
     }
 
     private void CreateNewPlayer()

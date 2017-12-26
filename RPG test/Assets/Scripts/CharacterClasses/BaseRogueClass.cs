@@ -14,6 +14,8 @@ public class BaseRogueClass : BaseCharacterClass {
         Intellect = 5;
         Charisma = 10;
         Wisdom = 6;
+        playerAbilities.Add(new AutoAttack());
+        playerAbilities.Add(new Backstab());
     }
 
 }

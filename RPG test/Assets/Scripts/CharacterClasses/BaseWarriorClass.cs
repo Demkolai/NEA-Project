@@ -14,6 +14,8 @@ public class BaseWarriorClass : BaseCharacterClass {
         Intellect = 8;
         Charisma = 7;
         Wisdom = 6;
+        playerAbilities.Add(new AutoAttack());
+        playerAbilities.Add(new SwordSlash());
     }
 
 }

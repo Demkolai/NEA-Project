@@ -14,6 +14,8 @@ public class BaseCharacterClass {
     private int charisma;
     private int wisdom;
 
+    public List<BaseAbility> playerAbilities = new List<BaseAbility>();
+
     public string CharacterClassName
     {
         get { return characterClassName; }

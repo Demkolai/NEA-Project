@@ -70,7 +70,7 @@ public class StatAllocationModule {
 
     private void RetrieveBaseStatPoints()
     {
-        BaseCharacterClass cClass = GameInfromation.PlayerClass;
+        BaseCharacterClass cClass = GameInformation.PlayerClass;
 
         pointsToAllocate[0] = cClass.Stamina;
         baseStatPoints[0] = cClass.Stamina;

@@ -5,6 +5,13 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour {
 
     private bool ReceivedXP = false;
+    private BattleStateStart battleStateStartScript = new BattleStateStart();
+    private BattleStateAddStatusEffect battleStateAddStatusEffectScript = new BattleStateAddStatusEffect();
+
+    public static BattleCalculations battleCalcScript = new BattleCalculations();
+    public static BaseAbility playerUsedAbility;
+    public static int statusEffectBaseDamage;
+
     private int maxPlayerLvl = 50;
 
     public enum BattleStates
@@ -23,34 +30,40 @@ public class StateMachine : MonoBehaviour {
 	
 	void Start () {
 
+        LoadInformation.LoadAllInfromation();
         currentState = BattleStates.START;
 
 	}
 	
 	void Update () { //acts as a loop.
 
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
 
         switch (currentState) //a switch is a case statement in a loop which is the void update.
         {
             case (BattleStates.START):
+                battleStateStartScript.PrepareBattle();
                 break;
 
             case (BattleStates.PLAYERCHOICE):
+                
                 break;
 
             case (BattleStates.ENEMYCHOICE):
                 break;
 
             case (BattleStates.CALCULATEDAMAGE): //calculate damage and if status effect is active, add that damage.
+                battleCalcScript.CalculateTotalPlayerDamage(playerUsedAbility);
                 break;
 
             case (BattleStates.ADDSTATUSEFFECTS):
+                battleStateAddStatusEffectScript.CheckAbilityForStatusEffects(playerUsedAbility);
                 break;
+
 
             case (BattleStates.WIN):
 
-                if (GameInfromation.PlayerLevel < maxPlayerLvl)
+                if (GameInformation.PlayerLevel < maxPlayerLvl)
                 {
                     if (!ReceivedXP)
                     {
@@ -60,14 +73,14 @@ public class StateMachine : MonoBehaviour {
                 }
                 else
                 {
-                    GameInfromation.PlayerLevel = maxPlayerLvl;
+                    GameInformation.PlayerLevel = maxPlayerLvl;
                 }
 
                 break;
 
             case (BattleStates.LOSE):
 
-                if (GameInfromation.PlayerLevel < maxPlayerLvl)
+                if (GameInformation.PlayerLevel < maxPlayerLvl)
                 {
                     if (!ReceivedXP)
                     {
@@ -77,7 +90,7 @@ public class StateMachine : MonoBehaviour {
                 }
                 else
                 {
-                    GameInfromation.PlayerLevel = maxPlayerLvl;
+                    GameInformation.PlayerLevel = maxPlayerLvl;
                 }
 
                 break;

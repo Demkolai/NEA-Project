@@ -108,28 +108,43 @@ public class DisplayCreatePlayerFuntions {
 
     }
 
-    private void ChooseClass(int classSelection)
+    private void ChooseClass(int classSelection) //error here where it doesnt find the class in other scripts, more specifically the combat phase.
     {
         //class selection based on which block is chosen from the 5 available buttons.
         if (classSelection == 0)
         {
-            GameInfromation.PlayerClass = new BaseWarriorClass();
+            GameInformation.PlayerClass = new BaseWarriorClass();
+            GameInformation.PlayerClasss = "Warrior";
+            GameInformation.PlayerMoveOne = new AutoAttack();
+            GameInformation.PlayerMoveTwo = new SwordSlash();
         }
         else if (classSelection == 1)
         {
-            GameInfromation.PlayerClass = new BaseMageClass();
+            GameInformation.PlayerClass = new BaseMageClass();
+            GameInformation.PlayerClasss = "Mage";
+            GameInformation.PlayerMoveOne = new RangedAutoAttack();
+            GameInformation.PlayerMoveTwo = new Fireblast();
         }
         else if (classSelection == 2)
         {
-            GameInfromation.PlayerClass = new BaseRogueClass();
+            GameInformation.PlayerClass = new BaseRogueClass();
+            GameInformation.PlayerClasss = "Rogue";
+            GameInformation.PlayerMoveOne = new AutoAttack();
+            GameInformation.PlayerMoveTwo = new Backstab();
         }
         else if (classSelection == 3)
         {
-            GameInfromation.PlayerClass = new BaseBardClass();
+            GameInformation.PlayerClass = new BaseBardClass();
+            GameInformation.PlayerClasss = "Bard";
+            GameInformation.PlayerMoveOne = new HealingSong();
+            GameInformation.PlayerMoveTwo = new EmpoweringSong();
         }
         else if (classSelection == 4)
         {
-            GameInfromation.PlayerClass = new BaseArcherClass();
+            GameInformation.PlayerClass = new BaseArcherClass();
+            GameInformation.PlayerClasss = "Archer";
+            GameInformation.PlayerMoveOne = new RangedAutoAttack();
+            GameInformation.PlayerMoveTwo = new PowerShot();
         }
     }
 
@@ -162,12 +177,12 @@ public class DisplayCreatePlayerFuntions {
                 }
                 else if (CreateAPlayerGUI.currentState == CreateAPlayerGUI.CreateAPlayerStates.STATALLOCATION)
                 {
-                    GameInfromation.Stamina = statAllocationModule.pointsToAllocate[0];
-                    GameInfromation.Strength = statAllocationModule.pointsToAllocate[1];
-                    GameInfromation.Intellect = statAllocationModule.pointsToAllocate[2];
-                    GameInfromation.Dexterity = statAllocationModule.pointsToAllocate[3];
-                    GameInfromation.Charisma = statAllocationModule.pointsToAllocate[4];
-                    GameInfromation.Wisdom = statAllocationModule.pointsToAllocate[5];
+                    GameInformation.Stamina = statAllocationModule.pointsToAllocate[0];
+                    GameInformation.Strength = statAllocationModule.pointsToAllocate[1];
+                    GameInformation.Intellect = statAllocationModule.pointsToAllocate[2];
+                    GameInformation.Dexterity = statAllocationModule.pointsToAllocate[3];
+                    GameInformation.Charisma = statAllocationModule.pointsToAllocate[4];
+                    GameInformation.Wisdom = statAllocationModule.pointsToAllocate[5];
                     CreateAPlayerGUI.currentState = CreateAPlayerGUI.CreateAPlayerStates.FINALSETUP;
                 }
 
@@ -180,8 +195,10 @@ public class DisplayCreatePlayerFuntions {
             {
                 //Final save here.
 
-                GameInfromation.PlayerName = playerFirstName + " " + playerLastName;
-                GameInfromation.CharacterBio = characterBio;
+                GameInformation.PlayerName = playerFirstName + " " + playerLastName;
+                GameInformation.CharacterBio = characterBio;
+                GameInformation.PlayerLevel = 1;
+                GameInformation.Gold = 100;
 
                 SaveInformation.SaveAllInfromation();
                 Debug.Log("Final Save Complete");

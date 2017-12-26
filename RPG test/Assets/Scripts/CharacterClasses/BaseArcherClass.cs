@@ -14,6 +14,8 @@ public class BaseArcherClass : BaseCharacterClass {
         Intellect = 6;
         Charisma = 9;
         Wisdom = 6;
+        playerAbilities.Add(new RangedAutoAttack());
+        playerAbilities.Add(new PowerShot());
     }
 
 }
