@@ -14,6 +14,10 @@ public class BaseEnemy {
     private int charisma;     //buff duration and heal power (for a bard)
     private int wisdom;       //mana regen and mana pool
     private int armor;        //damage reduction
+    private int health;       //health of enemy
+    private int mana;         //mana of enemy
+    private BaseAbility abilityOne; //ability one of enemy
+    private BaseAbility abilityTwo; //ability two of enemy
 
     public string EnemyName { get; set; }
     public int EnemyLevel { get; set; }
@@ -25,6 +29,8 @@ public class BaseEnemy {
     public int Charisma { get; set; }
     public int Wisdom { get; set; }
     public int Armor { get; set; }
-
-
+    public BaseAbility AbilityOne { get; set; }
+    public BaseAbility AbilityTwo { get; set; }
+    public int Health { get; set; }
+    public int Mana { get; set; }
 }

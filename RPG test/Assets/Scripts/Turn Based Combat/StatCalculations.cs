@@ -7,7 +7,7 @@ public class StatCalculations {
     private float playerStaminaModifier = 0.15f; // 0.15f = 15%
     private float playerWisdomModifier = 0.1f; // 0.1f = 10%
 
-    private float enemyStaminaModifier = 0.25f; // 0.25f = 25%
+    private float enemyStaminaModifier = 0.15f; // 0.25f = 25%
     private float enemyStrengthModifier = 0.2f; // 0.2f = 20%
     private float enemyIntellectModifier = 0.2f;
     private float enemyDexterityModifier = 0.2f;
@@ -83,12 +83,12 @@ public class StatCalculations {
     //------------------------------------------------------------------------------
     public int CalculateHealth(int statValue)
     {
-        return statValue * 100; //calculating health based on stamina
+        return statValue * 15; //calculating health based on stamina
     }
 
     public int CalculateMana(int statValue)
     {
-        return statValue * 75; //calculating mana based on wisdom
+        return statValue * 10; //calculating mana based on wisdom
     }
     //-----------------------------------------------------------------------------
     public int FindPlayerClassBonusDamage(string playerClass) // used to 

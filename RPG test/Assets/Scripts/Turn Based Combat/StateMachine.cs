@@ -7,10 +7,14 @@ public class StateMachine : MonoBehaviour {
     private bool ReceivedXP = false;
     private BattleStateStart battleStateStartScript = new BattleStateStart();
     private BattleStateAddStatusEffect battleStateAddStatusEffectScript = new BattleStateAddStatusEffect();
+    private BattleStateEnemyChoice battleStateEnemyChoiceScript = new BattleStateEnemyChoice();
 
     public static BattleCalculations battleCalcScript = new BattleCalculations();
     public static BaseAbility playerUsedAbility;
+    public static BaseAbility enemyUsedAbility;
     public static int statusEffectBaseDamage;
+    public static int totalTurnCount;
+    public static BattleStates currentUser;
 
     private int maxPlayerLvl = 50;
 
@@ -21,6 +25,7 @@ public class StateMachine : MonoBehaviour {
         CALCULATEDAMAGE,
         ADDSTATUSEFFECTS,
         ENEMYCHOICE,
+        ENDTURN,
         WIN,
         LOSE
     }
@@ -31,6 +36,7 @@ public class StateMachine : MonoBehaviour {
 	void Start () {
 
         LoadInformation.LoadAllInfromation();
+        totalTurnCount = 1;
         currentState = BattleStates.START;
 
 	}
@@ -46,18 +52,31 @@ public class StateMachine : MonoBehaviour {
                 break;
 
             case (BattleStates.PLAYERCHOICE):
-                
+                currentUser = BattleStates.PLAYERCHOICE;
                 break;
 
             case (BattleStates.ENEMYCHOICE):
+                currentUser = BattleStates.ENEMYCHOICE;
+                battleStateEnemyChoiceScript.EnemyCompleteTurn();
                 break;
 
             case (BattleStates.CALCULATEDAMAGE): //calculate damage and if status effect is active, add that damage.
-                battleCalcScript.CalculateTotalPlayerDamage(playerUsedAbility);
+                if(currentUser == BattleStates.PLAYERCHOICE)
+                {
+                    battleCalcScript.CalculateTotalPlayerDamage(playerUsedAbility);
+                }
+                else if (currentUser == BattleStates.ENEMYCHOICE)
+                {
+                    battleCalcScript.CalculateTotalEnemyDamage(enemyUsedAbility);
+                }
                 break;
 
             case (BattleStates.ADDSTATUSEFFECTS):
                 battleStateAddStatusEffectScript.CheckAbilityForStatusEffects(playerUsedAbility);
+                break;
+
+            case (BattleStates.ENDTURN):
+                totalTurnCount += 1;
                 break;
 
 
@@ -99,23 +118,4 @@ public class StateMachine : MonoBehaviour {
 
 	}
 
-    void OnGUI() //used to create gui buttons and functions.
-    {
-        if(GUILayout.Button("NEXT STATE"))
-        {
-            if (currentState == BattleStates.START)
-            {
-                currentState = BattleStates.PLAYERCHOICE;
-            }
-            else if (currentState == BattleStates.PLAYERCHOICE)
-            {
-                currentState = BattleStates.ENEMYCHOICE;
-            }
-            else if (currentState == BattleStates.ENEMYCHOICE)
-            {
-                currentState = BattleStates.PLAYERCHOICE;
-            }
-            
-        }
-    }
 }

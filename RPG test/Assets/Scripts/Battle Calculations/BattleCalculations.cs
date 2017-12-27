@@ -13,21 +13,16 @@ public class BattleCalculations {
     private float totalAbilityDamage;
     private int playerClassModifier;
     private float totalPlayerDamage;
+    private float totalEnemyDamage;
     private int totalCritStrikeDamage;
 
     public void CalculateTotalPlayerDamage(BaseAbility usedAbility)
     {
-        //Debug.Log("Used Ability: " + usedAbility);
         totalAbilityDamage = (int)CalculateAbilityDamage(usedAbility);
-        //Debug.Log(totalAbilityDamage);
         totalPlayerDamage = totalAbilityDamage + CalculateStatusEffectDamage() + CalculateCriticalStrikeDamage(usedAbility);
+        //need to take away enemy health here.
         StateMachine.currentState = StateMachine.BattleStates.ENEMYCHOICE;
         Debug.Log("Total player damage: " + totalPlayerDamage);
-    }
-
-    public void CalculateUsedPlayerAbilityDamage(BaseAbility usedAbility)
-    {
-
         // move damage + critical strike - armor + weapon damage + stat modifier.
         //use an ability
         //calculate damage
@@ -36,6 +31,16 @@ public class BattleCalculations {
         //try to add it.
         //if effect is added, then apply damage from effect.
         //calculate total damage with status effect in mind.
+    }
+
+    public void CalculateTotalEnemyDamage(BaseAbility usedAbility)
+    {
+        totalAbilityDamage = (int)CalculateAbilityDamage(usedAbility);
+        totalEnemyDamage = totalAbilityDamage + CalculateStatusEffectDamage() + CalculateCriticalStrikeDamage(usedAbility);
+        //need to take away health from player here.
+        StateMachine.currentState = StateMachine.BattleStates.ENDTURN;
+        Debug.Log("Total Enemy damage: " + totalEnemyDamage);
+
     }
 
     private float CalculateAbilityDamage(BaseAbility usedAbility)
