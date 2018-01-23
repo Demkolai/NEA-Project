@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour {
 
-    //public GameObject player;
-    //private Vector3 offset;  //used to calculate starting distance from camera.
+    //public Vector3 offset;  //used to calculate starting distance from camera.
+    //public float pitch = 2f;
 
     public Transform cameraTarget;
     private float x = 0.0f;
@@ -28,8 +29,6 @@ public class CameraController : MonoBehaviour {
 
 	void Start () {
 
-        //offset = transform.position - player.transform.position;
-
         Vector3 angles = transform.eulerAngles;
         x = angles.x;
         y = angles.y;
@@ -42,6 +41,14 @@ public class CameraController : MonoBehaviour {
 	
 	// Late update is called after update.
 	void LateUpdate () {
+
+        //transform.position = cameraTarget.position - offset * zoomRate;
+        //transform.LookAt(cameraTarget.position + Vector3.up * pitch);
+
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
 
         if (Input.GetMouseButton(0)) { // 0 = left mouse button, 1 = right mouse button
             x += Input.GetAxis("Mouse X") * mouseXSpeedMod;

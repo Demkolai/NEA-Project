@@ -18,6 +18,13 @@ public class StateMachine : MonoBehaviour {
 
     private int maxPlayerLvl = 50;
 
+    public GameObject VictoryScreen;
+    public GameObject DeathScreen;
+    public GameObject MainChoiceMenu;
+    public GameObject DamageLog;
+    public GameObject PlayerHPBar;
+    public GameObject EnemyHPBar;
+
     public enum BattleStates
     {
         START,
@@ -42,8 +49,6 @@ public class StateMachine : MonoBehaviour {
 	}
 	
 	void Update () { //acts as a loop.
-
-        //Debug.Log(currentState);
 
         switch (currentState) //a switch is a case statement in a loop which is the void update.
         {
@@ -77,10 +82,24 @@ public class StateMachine : MonoBehaviour {
 
             case (BattleStates.ENDTURN):
                 totalTurnCount += 1;
+                if (GameInformation.PlayerHealth <= 0)
+                {
+                    currentState = StateMachine.BattleStates.LOSE;
+                }
+                else
+                {
+                    currentState = StateMachine.BattleStates.PLAYERCHOICE;
+                }
                 break;
 
 
             case (BattleStates.WIN):
+
+                VictoryScreen.SetActive(true);
+                MainChoiceMenu.SetActive(false);
+                PlayerHPBar.SetActive(false);
+                EnemyHPBar.SetActive(false);
+                DamageLog.SetActive(false);
 
                 if (GameInformation.PlayerLevel < maxPlayerLvl)
                 {
@@ -99,6 +118,12 @@ public class StateMachine : MonoBehaviour {
 
             case (BattleStates.LOSE):
 
+                DeathScreen.SetActive(true);
+                MainChoiceMenu.SetActive(false);
+                PlayerHPBar.SetActive(false);
+                EnemyHPBar.SetActive(false);
+                DamageLog.SetActive(false);
+
                 if (GameInformation.PlayerLevel < maxPlayerLvl)
                 {
                     if (!ReceivedXP)
@@ -115,6 +140,7 @@ public class StateMachine : MonoBehaviour {
                 break;
 
         }
+
 
 	}
 

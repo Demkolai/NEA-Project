@@ -38,10 +38,11 @@ public class BattleStateStart {
         newEnemy.Wisdom = statCalculationsScript.CalculateStat(newEnemy.EnemyClass.Wisdom, StatCalculations.StatType.WISDOM, newEnemy.EnemyLevel, isEnemy);
         newEnemy.Health = statCalculationsScript.CalculateHealth(newEnemy.Stamina);
         newEnemy.Mana = statCalculationsScript.CalculateMana(newEnemy.Wisdom);
-        newEnemy.AbilityOne = new AutoAttack();
-        newEnemy.AbilityTwo = new SwordSlash();
-        newEnemy.Armor = 10 * newEnemy.EnemyLevel;
-        
+
+        newEnemy.Armor = 5 * newEnemy.EnemyLevel;
+        SaveEnemyData();
+
+
     }
 
     private void DeterminePlayerVitals()
@@ -51,7 +52,31 @@ public class BattleStateStart {
         playerHealth = statCalculationsScript.CalculateHealth(playerStamina); //calcualting health
         playerMana = statCalculationsScript.CalculateMana(playerWisdom); // calculating mana
         GameInformation.PlayerHealth = playerHealth;
+        GameInformation.MaxPlayerHealth = playerHealth;
         GameInformation.PlayerMana = playerMana;
+        GameInformation.MaxPlayerMana = playerMana;
+
+    }
+
+    private void SaveEnemyData()
+    {
+        EnemyInformation.EnemyName = newEnemy.EnemyName;
+        EnemyInformation.EnemyLevel = newEnemy.EnemyLevel;
+        EnemyInformation.EnemyClass = new BaseWarriorClass();
+        EnemyInformation.EnemyClasss = "Warrior" ;
+        EnemyInformation.Stamina = newEnemy.Stamina;
+        EnemyInformation.Strength = newEnemy.Strength;
+        EnemyInformation.Intellect = newEnemy.Intellect;
+        EnemyInformation.Dexterity = newEnemy.Dexterity;
+        EnemyInformation.Charisma = newEnemy.Charisma;
+        EnemyInformation.Wisdom = newEnemy.Wisdom;
+        EnemyInformation.Health = newEnemy.Health;
+        EnemyInformation.MaxHealth = newEnemy.Health;
+        EnemyInformation.Mana = newEnemy.Mana;
+        EnemyInformation.MaxMana = newEnemy.Mana;
+        EnemyInformation.AbilityOne = new AutoAttack();
+        EnemyInformation.AbilityTwo = new SwordSlash();
+        EnemyInformation.Armor = newEnemy.Armor;
 
     }
 }

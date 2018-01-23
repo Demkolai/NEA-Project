@@ -11,16 +11,17 @@ public class EnemyAbilityChoice {
     public BaseAbility ChooseEnemyAbility()
     {
         int temp = Random.Range(1, 21);
-        if (temp < 11)
+        if (temp <= 11)
         {
             enemyUsedAbility = new AutoAttack(); //or battleStateStartScript.newEnemy.AbilityOne
             return enemyUsedAbility;
         }
         else if (temp > 11)
         {
-            if(battleStateStartScript.newEnemy.Mana >= SwordSlashManaCost.AbilityCost) //battleStateStartScript.newEnemy.AbilityTwo.AbilityCost doesnt work
+            if(EnemyInformation.Mana >= SwordSlashManaCost.AbilityCost) //battleStateStartScript.newEnemy.AbilityTwo.AbilityCost doesnt work
             {
                 enemyUsedAbility = new SwordSlash(); //or battleStateStartScript.newEnemy.AbilityTwo;
+                EnemyInformation.Mana = EnemyInformation.Mana - SwordSlashManaCost.AbilityCost;
                 return enemyUsedAbility;
             }
             else

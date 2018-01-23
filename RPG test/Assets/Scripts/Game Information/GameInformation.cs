@@ -32,8 +32,11 @@ public class GameInformation : MonoBehaviour
 	public static BaseAbility PlayerMoveOne { get; set; }
 	public static BaseAbility PlayerMoveTwo { get; set; }
 
-    public static int PlayerHealth { get; set; }
-    public static int PlayerMana { get; set; }
+    public static float PlayerHealth { get; set; }
+    public static float MaxPlayerHealth { get; set; }
+
+    public static float PlayerMana { get; set; }
+    public static float MaxPlayerMana { get; set; }
 
 
 }

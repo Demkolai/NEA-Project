@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class IncreaseExperience {
 
-    private static float xpToGive;
+    public static float xpToGive;
     private static LevelUp levelUpScript = new LevelUp();
 
     public static void AddExperienceWin()
@@ -12,7 +12,7 @@ public static class IncreaseExperience {
         xpToGive = (GameInformation.PlayerLevel * 2) * 100;
         GameInformation.CurrentXP += (int) xpToGive;
         CheckIfPlayerLeveled();
-        Debug.Log(xpToGive);
+        Debug.Log("Won battle, xp to give: " + xpToGive);
     }
 
     public static void AddExperienceLose()
@@ -20,7 +20,7 @@ public static class IncreaseExperience {
         xpToGive = (GameInformation.PlayerLevel * 2) * 15;
         GameInformation.CurrentXP += (int)xpToGive;
         CheckIfPlayerLeveled();
-        Debug.Log(xpToGive);
+        Debug.Log("Lost battle, xp to give: " +xpToGive);
     }
 
     private static void CheckIfPlayerLeveled()

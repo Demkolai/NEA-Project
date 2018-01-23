@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DisplayCreatePlayerFuntions {
 
@@ -202,26 +203,27 @@ public class DisplayCreatePlayerFuntions {
 
                 SaveInformation.SaveAllInfromation();
                 Debug.Log("Final Save Complete");
+                SceneManager.LoadScene("Level 1");
             }
         }
 
 
         //button to go back in character creation
-        if (CreateAPlayerGUI.currentState != CreateAPlayerGUI.CreateAPlayerStates.CLASSSELECTION)
+        if (GUI.Button(new Rect(680, 550, 50, 50), "Back"))
         {
-            if (GUI.Button(new Rect(680, 550, 50, 50), "Back"))
+            if (CreateAPlayerGUI.currentState == CreateAPlayerGUI.CreateAPlayerStates.FINALSETUP)
             {
-                if (CreateAPlayerGUI.currentState == CreateAPlayerGUI.CreateAPlayerStates.FINALSETUP)
-                {
-                    CreateAPlayerGUI.currentState = CreateAPlayerGUI.CreateAPlayerStates.STATALLOCATION;
-                }
-                else if (CreateAPlayerGUI.currentState == CreateAPlayerGUI.CreateAPlayerStates.STATALLOCATION)
-                {
-                    statAllocationModule.didRunOnce = false;
-                    statAllocationModule.availablePoints = 5;
-                    CreateAPlayerGUI.currentState = CreateAPlayerGUI.CreateAPlayerStates.CLASSSELECTION;
-                }
-
+                CreateAPlayerGUI.currentState = CreateAPlayerGUI.CreateAPlayerStates.STATALLOCATION;
+            }
+            if (CreateAPlayerGUI.currentState == CreateAPlayerGUI.CreateAPlayerStates.STATALLOCATION)
+            {
+                statAllocationModule.didRunOnce = false;
+                statAllocationModule.availablePoints = 5;
+                CreateAPlayerGUI.currentState = CreateAPlayerGUI.CreateAPlayerStates.CLASSSELECTION;
+            }
+            else if (CreateAPlayerGUI.currentState == CreateAPlayerGUI.CreateAPlayerStates.CLASSSELECTION)
+            {
+                SceneManager.LoadScene("Main Menu");
             }
 
         }

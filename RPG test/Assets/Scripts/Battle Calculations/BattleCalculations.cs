@@ -16,14 +16,27 @@ public class BattleCalculations {
     private float totalEnemyDamage;
     private int totalCritStrikeDamage;
 
+    // -----------------------------------------------------Player Damage Calculation--------------------------------------------------------------------------------
+
     public void CalculateTotalPlayerDamage(BaseAbility usedAbility)
     {
-        totalAbilityDamage = (int)CalculateAbilityDamage(usedAbility);
-        totalPlayerDamage = totalAbilityDamage + CalculateStatusEffectDamage() + CalculateCriticalStrikeDamage(usedAbility);
-        //need to take away enemy health here.
-        StateMachine.currentState = StateMachine.BattleStates.ENEMYCHOICE;
-        Debug.Log("Total player damage: " + totalPlayerDamage);
-        // move damage + critical strike - armor + weapon damage + stat modifier.
+        totalAbilityDamage = (int)CalculatePlayerAbilityDamage(usedAbility);
+        totalPlayerDamage = totalAbilityDamage + CalculatePlayerStatusEffectDamage() + CalculatePlayerCriticalStrikeDamage(usedAbility) - EnemyInformation.Armor;
+        EnemyInformation.Health = EnemyInformation.Health - (int)totalPlayerDamage;
+
+        if(EnemyInformation.Health <= 0)
+        {
+            StateMachine.currentState = StateMachine.BattleStates.WIN;
+        }
+        else
+        {
+            Debug.Log("Total player damage: " + totalPlayerDamage);
+            BattleGUI.playerDamageValue = GameInformation.PlayerName + " dealt " + totalPlayerDamage;
+            BattleGUI.isPlayerDamage = true;
+            StateMachine.currentState = StateMachine.BattleStates.ENEMYCHOICE;
+        }
+
+        // move damage + status effect damage + critical strike - armor + weapon damage.
         //use an ability
         //calculate damage
         //check status effect
@@ -33,32 +46,22 @@ public class BattleCalculations {
         //calculate total damage with status effect in mind.
     }
 
-    public void CalculateTotalEnemyDamage(BaseAbility usedAbility)
-    {
-        totalAbilityDamage = (int)CalculateAbilityDamage(usedAbility);
-        totalEnemyDamage = totalAbilityDamage + CalculateStatusEffectDamage() + CalculateCriticalStrikeDamage(usedAbility);
-        //need to take away health from player here.
-        StateMachine.currentState = StateMachine.BattleStates.ENDTURN;
-        Debug.Log("Total Enemy damage: " + totalEnemyDamage);
-
-    }
-
-    private float CalculateAbilityDamage(BaseAbility usedAbility)
+    private float CalculatePlayerAbilityDamage(BaseAbility usedAbility)
     {
         abilityPower = usedAbility.AbilityPower; //retrieves power of move.
         totalAbilityDamage = abilityPower + statCalcScript.FindPlayerClassBonusDamage(GameInformation.PlayerClasss); ;
         return totalAbilityDamage;
     }
 
-    private int CalculateStatusEffectDamage()
+    private int CalculatePlayerStatusEffectDamage()
     {
         statusEffectDamage = StateMachine.statusEffectBaseDamage * GameInformation.PlayerLevel;
         return statusEffectDamage;
     }
 
-    private float CalculateCriticalStrikeDamage (BaseAbility usedAbility)
+    private float CalculatePlayerCriticalStrikeDamage(BaseAbility usedAbility)
     {
-        if (DecideIfAbilityCriticallyHit(usedAbility)) //if the function returns true
+        if (DecideIfPlayerAbilityCriticallyHit(usedAbility)) //if the function returns true
         {
             totalCritStrikeDamage = (int)(totalAbilityDamage * 0.25f);
             return totalCritStrikeDamage;
@@ -69,11 +72,11 @@ public class BattleCalculations {
         }
     }
 
-    private bool DecideIfAbilityCriticallyHit(BaseAbility usedAbility)
+    private bool DecideIfPlayerAbilityCriticallyHit(BaseAbility usedAbility)
     {
         int randomtemp = Random.Range(1, 101);
         int CritChance = (int)(usedAbility.AbilityCritChance + (GameInformation.Dexterity * 0.2));
-        if(randomtemp <= CritChance)
+        if (randomtemp <= CritChance)
         {
             Debug.Log("CRIT!");
             return true;
@@ -83,4 +86,60 @@ public class BattleCalculations {
             return false;
         }
     } 
+
+    // -----------------------------------------------------Enemy Damage Calculation--------------------------------------------------------------------------------
+
+    public void CalculateTotalEnemyDamage(BaseAbility usedAbility)
+    {
+        totalAbilityDamage = (int)CalculateEnemyAbilityDamage(usedAbility);
+        totalEnemyDamage = totalAbilityDamage + CalculateEnemyStatusEffectDamage() + CalculateEnemyCriticalStrikeDamage(usedAbility);
+        GameInformation.PlayerHealth = GameInformation.PlayerHealth - (int)totalEnemyDamage;
+
+        Debug.Log("Total Enemy damage: " + totalEnemyDamage);
+        BattleGUI.enemyDamageValue = EnemyInformation.EnemyName + " dealt " + totalEnemyDamage;
+        BattleGUI.isEnemyDamage = true;
+        StateMachine.currentState = StateMachine.BattleStates.ENDTURN;
+
+    }
+
+    private float CalculateEnemyAbilityDamage(BaseAbility usedAbility)
+    {
+        abilityPower = usedAbility.AbilityPower; //retrieves power of move.
+        totalAbilityDamage = abilityPower + statCalcScript.FindPlayerClassBonusDamage(EnemyInformation.EnemyClasss); ;
+        return totalAbilityDamage;
+    }
+
+    private int CalculateEnemyStatusEffectDamage()
+    {
+        statusEffectDamage = StateMachine.statusEffectBaseDamage * EnemyInformation.EnemyLevel;
+        return statusEffectDamage;
+    }
+
+    private float CalculateEnemyCriticalStrikeDamage(BaseAbility usedAbility)
+    {
+        if (DecideIfEnemyAbilityCriticallyHit(usedAbility)) //if the function returns true
+        {
+            totalCritStrikeDamage = (int)(totalAbilityDamage * 0.25f);
+            return totalCritStrikeDamage;
+        }
+        else
+        {
+            return totalCritStrikeDamage = 0;
+        }
+    }
+
+    private bool DecideIfEnemyAbilityCriticallyHit(BaseAbility usedAbility)
+    {
+        int randomtemp = Random.Range(1, 101);
+        int CritChance = (int)(usedAbility.AbilityCritChance + (EnemyInformation.Dexterity * 0.2));
+        if (randomtemp <= CritChance)
+        {
+            Debug.Log("CRIT!");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
