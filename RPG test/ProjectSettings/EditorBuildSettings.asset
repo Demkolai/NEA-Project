@@ -15,8 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Game Scenes/Level 1.unity
     guid: b98d7bd72432d2c438d16ddc03e0e049
   - enabled: 1
+    path: Assets/Scenes/Main Game Scenes/Level 2.unity
+    guid: 331d668fd356f0447aeab8af68581aaa
+  - enabled: 1
+    path: Assets/Scenes/Main Game Scenes/Level 3.unity
+    guid: 1d60d48c69d29f7458aba746aded3b65
+  - enabled: 1
     path: Assets/Scenes/Main Game Scenes/Turn Based Combat UI.unity
     guid: 4433f68b4e347284c88196cc9b1e1d69
-  - enabled: 0
-    path: Assets/Scenes/Test Scenes/Test.unity
-    guid: da6e4bff851db6b41ac6d07152656d46

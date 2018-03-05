@@ -10,7 +10,7 @@ public class AutoAttack : BaseAbility {
         AbilityName = "Auto Attack";
         AbilityDescription = "A basic attack that costs no mana";
         AbilityID = 1;
-        AbilityPower = 10;
+        AbilityPower = 8*GameInformation.PlayerLevel;
         AbilityCost = 0;
         AbilityStatusEffect = new EmptyStatusEffect();
         AbilityCritChance = 20;

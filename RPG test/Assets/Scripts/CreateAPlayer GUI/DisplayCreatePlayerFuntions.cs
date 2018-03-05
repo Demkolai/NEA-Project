@@ -8,7 +8,7 @@ public class DisplayCreatePlayerFuntions {
     private StatAllocationModule statAllocationModule = new StatAllocationModule();
 
     private int classSelection;
-    private string[] classSelectionNames = new string[] { "Warrior", "Mage", "Rogue", "Bard", "Archer" };
+    private string[] classSelectionNames = new string[] { "Warrior", "Mage", "Rogue", "Archer" };
     private string playerFirstName = "Enter Name";
     private string playerLastName = "Enter Name";
     private string characterBio = "Enter description";
@@ -41,11 +41,6 @@ public class DisplayCreatePlayerFuntions {
         }
         else if (classSelection == 3)
         {
-            BaseCharacterClass tempClass = new BaseBardClass();
-            return tempClass.CharacterClassDescription;
-        }
-        else if (classSelection == 4)
-        {
             BaseCharacterClass tempClass = new BaseArcherClass();
             return tempClass.CharacterClassDescription;
         }
@@ -74,12 +69,6 @@ public class DisplayCreatePlayerFuntions {
             return tempStats;
         }
         else if (classSelection == 3)
-        {
-            BaseCharacterClass tempClass = new BaseBardClass();
-            string tempStats = "Stamina: " + tempClass.Stamina + "\n" + "Strength: " + tempClass.Strength + "\n" + "Intellect: " + tempClass.Intellect + "\n" + "Dexterity: " + tempClass.Dexterity + "\n" + "Charisma: " + tempClass.Charisma + "\n" + "Wisdom: " + tempClass.Wisdom;
-            return tempStats;
-        }
-        else if (classSelection == 4)
         {
             BaseCharacterClass tempClass = new BaseArcherClass();
             string tempStats = "Stamina: " + tempClass.Stamina + "\n" + "Strength: " + tempClass.Strength + "\n" + "Intellect: " + tempClass.Intellect + "\n" + "Dexterity: " + tempClass.Dexterity + "\n" + "Charisma: " + tempClass.Charisma + "\n" + "Wisdom: " + tempClass.Wisdom;
@@ -134,13 +123,6 @@ public class DisplayCreatePlayerFuntions {
             GameInformation.PlayerMoveTwo = new Backstab();
         }
         else if (classSelection == 3)
-        {
-            GameInformation.PlayerClass = new BaseBardClass();
-            GameInformation.PlayerClasss = "Bard";
-            GameInformation.PlayerMoveOne = new HealingSong();
-            GameInformation.PlayerMoveTwo = new EmpoweringSong();
-        }
-        else if (classSelection == 4)
         {
             GameInformation.PlayerClass = new BaseArcherClass();
             GameInformation.PlayerClasss = "Archer";
@@ -200,6 +182,7 @@ public class DisplayCreatePlayerFuntions {
                 GameInformation.CharacterBio = characterBio;
                 GameInformation.PlayerLevel = 1;
                 GameInformation.Gold = 100;
+                GameInformation.Armor = 10;
 
                 SaveInformation.SaveAllInfromation();
                 Debug.Log("Final Save Complete");

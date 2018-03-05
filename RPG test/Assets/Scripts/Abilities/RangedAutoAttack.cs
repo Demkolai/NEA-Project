@@ -10,7 +10,7 @@ public class RangedAutoAttack : BaseAbility {
         AbilityName = "Ranged Auto Attack";
         AbilityDescription = "A ranged basic attack that costs no mana";
         AbilityID = 2;
-        AbilityPower = 10;
+        AbilityPower = 8 * GameInformation.PlayerLevel;
         AbilityCost = 0;
         AbilityStatusEffect = new EmptyStatusEffect();
         AbilityCritChance = 20;

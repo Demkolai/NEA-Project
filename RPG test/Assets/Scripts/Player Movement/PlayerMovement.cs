@@ -70,17 +70,5 @@ public class PlayerMovement : MonoBehaviour {
         {
             moveSpeed = 15.0f;
         }
-
-
-
-        //mouse control for later use.
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Left Mouse button");
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log("Right Mouse button");
-        }
     }
 }

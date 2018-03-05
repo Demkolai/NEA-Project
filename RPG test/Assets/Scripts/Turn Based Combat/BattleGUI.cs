@@ -28,7 +28,9 @@ public class BattleGUI : MonoBehaviour {
     private Text Attack2StatusEffect;
 
     private Text AmountOfXPDefeat;
+    private Text LargestAttackLoss;
     private Text AmountOfXPVictory;
+    private Text LargestAttackWin;
 
     private Text DamageLogText1;
     private Text DamageLogText2;
@@ -42,6 +44,9 @@ public class BattleGUI : MonoBehaviour {
     public static bool isPlayerDamage;
     public static string enemyDamageValue;
     public static bool isEnemyDamage;
+
+    private bool hasUserHealed = false;
+    private int healthToHeal;
 
     // Use this for initialization
     void Start () {
@@ -108,7 +113,15 @@ public class BattleGUI : MonoBehaviour {
 
         if (damageLogQueue.rear == 5)
         {
-            InvokeRepeating("DequeueFuncion", 0.5f , 6);
+            InvokeRepeating("DequeueFuncion", 0.5f , 6); //* this is where the repeating dequeue happens after x seconds.
+        }
+
+        if (StateMachine.displayDamageData == true)
+        {
+            LargestAttackLoss = transform.Find("DeathScreen").Find("LargestHit").GetComponent<Text>();
+            LargestAttackWin = transform.Find("VictoryScreen").Find("LargestHit").GetComponent<Text>();
+            LargestAttackLoss.text = "Your biggest hit was: " + StateMachine.damageNumbersToSort[StateMachine.damageArrayLength].ToString();
+            LargestAttackWin.text = "Your biggest hit was: " + StateMachine.damageNumbersToSort[StateMachine.damageArrayLength].ToString();
         }
 
     }
@@ -180,6 +193,31 @@ public class BattleGUI : MonoBehaviour {
     {
         string sceneName = PlayerPrefs.GetString("lastLoadedScene");
         SceneManager.LoadScene(sceneName);//back to previous scene
+    }
+
+    public void DecideIfCanHeal()
+    {
+        if (hasUserHealed == false)
+        {
+            UseHealthPotion();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public void UseHealthPotion()
+    {
+        hasUserHealed = true;
+        healthToHeal = (int)(GameInformation.MaxPlayerHealth / 100 * 20);
+        GameInformation.PlayerHealth += healthToHeal;
+        if(GameInformation.PlayerHealth > GameInformation.MaxPlayerHealth)
+        {
+            GameInformation.PlayerHealth = GameInformation.MaxPlayerHealth;
+        }
+        StateMachine.currentState = StateMachine.BattleStates.ENEMYCHOICE;
+        
     }
     
 }

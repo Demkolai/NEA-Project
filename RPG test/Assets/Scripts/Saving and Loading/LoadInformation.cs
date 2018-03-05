@@ -39,12 +39,6 @@ public class LoadInformation {
 			GameInformation.PlayerMoveOne = new RangedAutoAttack ();
 			GameInformation.PlayerMoveTwo = new PowerShot ();
 		}
-		else if (PlayerPrefs.GetString("Player Class") == "Bard"){
-			GameInformation.PlayerClass = new BaseBardClass ();
-			GameInformation.PlayerMoveOne = new HealingSong ();
-			GameInformation.PlayerMoveTwo = new EmpoweringSong ();
-		}
-
 
         if (PlayerPrefs.GetString("Equipment item 1") != null)
         {

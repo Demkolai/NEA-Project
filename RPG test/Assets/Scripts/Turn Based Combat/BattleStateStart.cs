@@ -39,7 +39,7 @@ public class BattleStateStart {
         newEnemy.Health = statCalculationsScript.CalculateHealth(newEnemy.Stamina);
         newEnemy.Mana = statCalculationsScript.CalculateMana(newEnemy.Wisdom);
 
-        newEnemy.Armor = 5 * newEnemy.EnemyLevel;
+        newEnemy.Armor = 2 * newEnemy.EnemyLevel;
         SaveEnemyData();
 
 

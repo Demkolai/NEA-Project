@@ -14,8 +14,6 @@ public class BaseBardClass : BaseCharacterClass {
         Intellect = 9;
         Charisma = 15;
         Wisdom = 9;
-        playerAbilities.Add(new HealingSong());
-        playerAbilities.Add(new EmpoweringSong());
     }
 
 }

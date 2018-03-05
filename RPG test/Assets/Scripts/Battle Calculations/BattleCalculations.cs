@@ -22,6 +22,7 @@ public class BattleCalculations {
     {
         totalAbilityDamage = (int)CalculatePlayerAbilityDamage(usedAbility);
         totalPlayerDamage = totalAbilityDamage + CalculatePlayerStatusEffectDamage() + CalculatePlayerCriticalStrikeDamage(usedAbility) - EnemyInformation.Armor;
+        StateMachine.damageNumbersHolder.Add((int)totalPlayerDamage);
         EnemyInformation.Health = EnemyInformation.Health - (int)totalPlayerDamage;
 
         if(EnemyInformation.Health <= 0)
@@ -92,7 +93,7 @@ public class BattleCalculations {
     public void CalculateTotalEnemyDamage(BaseAbility usedAbility)
     {
         totalAbilityDamage = (int)CalculateEnemyAbilityDamage(usedAbility);
-        totalEnemyDamage = totalAbilityDamage + CalculateEnemyStatusEffectDamage() + CalculateEnemyCriticalStrikeDamage(usedAbility);
+        totalEnemyDamage = totalAbilityDamage + CalculateEnemyStatusEffectDamage() + CalculateEnemyCriticalStrikeDamage(usedAbility) - GameInformation.Armor;
         GameInformation.PlayerHealth = GameInformation.PlayerHealth - (int)totalEnemyDamage;
 
         Debug.Log("Total Enemy damage: " + totalEnemyDamage);

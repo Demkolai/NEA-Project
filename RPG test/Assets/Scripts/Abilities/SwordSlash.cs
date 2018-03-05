@@ -10,8 +10,8 @@ public class SwordSlash : BaseAbility {
         AbilityName = "Sword Slash";
         AbilityDescription = "A swift slash that deals moderate damage and uses mana";
         AbilityID = 3;
-        AbilityPower = 20;
-        AbilityCost = 5;
+        AbilityPower = 15 * GameInformation.PlayerLevel;
+        AbilityCost = 30 + (int)(0.3 * GameInformation.PlayerLevel);
         AbilityStatusEffect = new BleedStatusEffect();
         AbilityCritChance = 30;
     }

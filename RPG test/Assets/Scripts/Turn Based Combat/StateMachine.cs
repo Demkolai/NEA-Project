@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StateMachine : MonoBehaviour {
@@ -8,6 +9,11 @@ public class StateMachine : MonoBehaviour {
     private BattleStateStart battleStateStartScript = new BattleStateStart();
     private BattleStateAddStatusEffect battleStateAddStatusEffectScript = new BattleStateAddStatusEffect();
     private BattleStateEnemyChoice battleStateEnemyChoiceScript = new BattleStateEnemyChoice();
+
+    public static List<int> damageNumbersHolder = new List<int>();
+    public static int[] damageNumbersToSort;
+    public static int damageArrayLength;
+    public static bool displayDamageData = false;
 
     public static BattleCalculations battleCalcScript = new BattleCalculations();
     public static BaseAbility playerUsedAbility;
@@ -28,6 +34,7 @@ public class StateMachine : MonoBehaviour {
     public enum BattleStates
     {
         START,
+        WAIT,
         PLAYERCHOICE,
         CALCULATEDAMAGE,
         ADDSTATUSEFFECTS,
@@ -46,7 +53,7 @@ public class StateMachine : MonoBehaviour {
         totalTurnCount = 1;
         currentState = BattleStates.START;
 
-	}
+    }
 	
 	void Update () { //acts as a loop.
 
@@ -95,6 +102,11 @@ public class StateMachine : MonoBehaviour {
 
             case (BattleStates.WIN):
 
+                damageNumbersToSort = damageNumbersHolder.ToArray();
+                damageArrayLength = damageNumbersToSort.Length - 1;
+                damageNumbersToSort.DoMergeSort();
+                displayDamageData = true;
+
                 VictoryScreen.SetActive(true);
                 MainChoiceMenu.SetActive(false);
                 PlayerHPBar.SetActive(false);
@@ -107,6 +119,7 @@ public class StateMachine : MonoBehaviour {
                     {
                         IncreaseExperience.AddExperienceWin();
                         ReceivedXP = true;
+                        SaveInformation.SaveAllInfromation();
                     }
                 }
                 else
@@ -117,6 +130,11 @@ public class StateMachine : MonoBehaviour {
                 break;
 
             case (BattleStates.LOSE):
+
+                damageNumbersToSort = damageNumbersHolder.ToArray();
+                damageArrayLength = damageNumbersToSort.Length - 1;
+                damageNumbersToSort.DoMergeSort();
+                displayDamageData = true;
 
                 DeathScreen.SetActive(true);
                 MainChoiceMenu.SetActive(false);
@@ -130,6 +148,7 @@ public class StateMachine : MonoBehaviour {
                     {
                         IncreaseExperience.AddExperienceLose();
                         ReceivedXP = true;
+                        SaveInformation.SaveAllInfromation();
                     }
                 }
                 else
@@ -140,8 +159,6 @@ public class StateMachine : MonoBehaviour {
                 break;
 
         }
-
-
 	}
 
 }

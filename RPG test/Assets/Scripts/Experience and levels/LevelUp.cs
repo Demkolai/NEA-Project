@@ -34,8 +34,32 @@ public class LevelUp {
 
 
         //give stat points
-
-
+        if (GameInformation.PlayerClasss == "Warrior")
+        {
+            GameInformation.Stamina += Random.Range(1 , 3);
+            GameInformation.Strength += Random.Range(1, 5);
+            GameInformation.Dexterity += Random.Range(1, 2);
+            GameInformation.Wisdom += Random.Range(1, 2);
+        }
+        if (GameInformation.PlayerClasss == "Mage")
+        {
+            GameInformation.Stamina += Random.Range(1, 3);
+            GameInformation.Intellect += Random.Range(1, 5);
+            GameInformation.Wisdom += Random.Range(1, 4);
+        }
+        if (GameInformation.PlayerClasss == "Archer")
+        {
+            GameInformation.Stamina += Random.Range(1, 3);
+            GameInformation.Dexterity += Random.Range(1, 5);
+            GameInformation.Wisdom += Random.Range(1, 2);
+        }
+        if (GameInformation.PlayerClasss == "Rogue")
+        {
+            GameInformation.Stamina += Random.Range(1, 3);
+            GameInformation.Dexterity += Random.Range(1, 5);
+            GameInformation.Strength += Random.Range(1, 2);
+            GameInformation.Wisdom += Random.Range(1, 2);
+        }
 
         //determine next amount of required xp
         DetermineRequiredXP();

@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-
         transform.Rotate(0, Input.GetAxis("RotationQE") * rotateSpeed, 0); //vector3 = (0,0,0) = (x,y,z)
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 horizontal = transform.TransformDirection(Vector3.right);

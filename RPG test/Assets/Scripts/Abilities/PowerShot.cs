@@ -10,8 +10,8 @@ public class PowerShot : BaseAbility {
         AbilityName = "Power Shot";
         AbilityDescription = "The archer pulls back the string and releases a powerful shot";
         AbilityID = 5;
-        AbilityPower = 20;
-        AbilityCost = 5;
+        AbilityPower = 15*GameInformation.PlayerLevel;
+        AbilityCost = 30+(int)(0.3*GameInformation.PlayerLevel);
         AbilityStatusEffect = new BleedStatusEffect();
         AbilityCritChance = 30;
 
