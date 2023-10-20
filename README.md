@@ -18,10 +18,10 @@ Algorithm that calculated damage done by the player or enemy based on the respct
 Link: https://github.com/PatrykOwczarz/The-Dungeon/blob/master/RPG%20test/Assets/Scripts/Battle%20Calculations/BattleCalculations.cs
 
 ## Areas of Improvement:
-- UI: This project uses the new Unity UI and the Legacy UI. Recreating and porting the Character creator and BattleUI to the new Unity UI would be a huge improvement.
-- Inventory system: Works but is not utilized with character system fully.
-- Generation of Items: WIP random item generator that would generate items based on animals such as "of the Bear" would be Stength and Stamina, "of the Owl" would be Intellect and Wisdom etc..
-- Save system: Currently the game does not persist after shutdown and going from Free-Roam into combat and back into Free-Roam puts the player back at the start of the level.
+- **UI:** This project uses the new Unity UI and the Legacy UI. Recreating and porting the Character creator and BattleUI to the new Unity UI would be a huge improvement.
+- **Inventory system:** Works but is not utilized with character system fully.
+- **Generation of Items:** WIP random item generator that would generate items based on animals such as "of the Bear" would be Stength and Stamina, "of the Owl" would be Intellect and Wisdom etc..
+- **Save system:** Currently the game does not persist after shutdown and going from Free-Roam into combat and back into Free-Roam puts the player back at the start of the level.
 
 # Demo video:
 Demo: https://www.youtube.com/watch?v=a_SEyTaseDs
